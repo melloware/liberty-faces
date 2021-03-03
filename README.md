@@ -40,7 +40,7 @@ Using `Incognito Mode` and pressing CTRL+F5 so it forced the browser to load all
 Metric                |  WildFly EE | Liberty        | Liberty (optimized) | Improvement |
 ----------------------| ----------  | ---------------| --------------------|-------------|
 Package Size          | 48.5 MB WAR | 169.0 MB JAR   | 169.0 MB JAR        | -248.45%    |
-Cold Startup          | 10.3 s      | 43.85 s        | 43.85 s             | -370.87%    |
+Cold Startup          | 10.3 s      | 24.23 s        | 24.23 s             | -135.24%    |
 Memory Used           | 140 MB      | 93.8 MB        | 93.8 MB             | 33.00%      |
 HTTP Requests         | 114         | 114            | 89                  | 21.93%      |
 Resource Size         | 4.4 MB      | 4.4 MB         | 4.4 MB              | -----       |
