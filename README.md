@@ -3,6 +3,8 @@
 
 OpenLiberty Faces
 ==========================
+[![LibertyFaces Logo](https://github.com/melloware/liberty-faces/blob/main/src/site/LibertyFaces.svg)](https://github.com/melloware/liberty-faces)
+
 
 ### Goals
 ***
