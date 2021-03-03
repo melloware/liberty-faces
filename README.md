@@ -37,18 +37,18 @@ Using `Incognito Mode` and pressing CTRL+F5 so it forced the browser to load all
 
 Metric                |  WildFly EE | Liberty        | Liberty (optimized) | Improvement |
 ----------------------| ----------  | ---------------| --------------------|-------------|
-Package Size          | 48.5 MB WAR | 142.0 MB JAR   | 142.0 MB JAR        | -192.78%    |
-Cold Startup          | 10.3 s      | 29.72 s        | 29.72 s             | -188.54%    |
-Memory Used           | 140 MB      | 121.2 MB       | 121.2 MB            | 13.43%      |
+Package Size          | 48.5 MB WAR | 169.0 MB JAR   | 169.0 MB JAR        | -248.45%    |
+Cold Startup          | 10.3 s      | 43.85 s        | 43.85 s             | -370.87%    |
+Memory Used           | 140 MB      | 93.8 MB        | 93.8 MB             | 33.00%      |
 HTTP Requests         | 114         | 114            | 89                  | 21.93%      |
 Resource Size         | 4.4 MB      | 4.4 MB         | 4.4 MB              | -----       |
 Transferred Size      | 4.4 MB      | 4.4 MB         | 2.9 MB              | 34.09%      |
-DOM Loaded            | 1150 ms     | 745 ms         | 699 ms              | 39.22%      |
-Lighthouse Score      | 59/100      | 61/100         | 98/100              | 66.10%      |
-First Paint           | 2.4 s       | 1.0 s          | 0.6 s               | 75.00%      |
-Largest Paint         | 2.7 s       | 5.2 s          | 1.0 s               | 62.96%      |
-Speed Index           | 2.4 s       | 1.8 s          | 0.9 s               | 62.50%      |
-Time To Interactive   | 3.9 s       | 5.2 s          | 1.0 s               | 74.36%      |
+DOM Loaded            | 1150 ms     | 1060 ms        | 916 ms              | 20.35%      |
+Lighthouse Score      | 59/100      | 46/100         | 94/100              | 42.37%      |
+First Paint           | 2.4 s       | 3.1 s          | 0.8 s               | 66.67%      |
+Largest Paint         | 2.7 s       | 4.3 s          | 1.4 s               | 48.15%      |
+Speed Index           | 2.4 s       | 3.1 s          | 1.2 s               | 50.00%      |
+Time To Interactive   | 3.9 s       | 4.4 s          | 1.4 s               | 64.10%      |
 
 
 ### Development
