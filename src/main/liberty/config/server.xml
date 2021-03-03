@@ -1,0 +1,19 @@
+<server description="PrimeFaces Showcase">
+    <featureManager>
+        <feature>mpConfig-1.3</feature>
+        <feature>mpHealth-2.1</feature>
+        <feature>mpMetrics-2.2</feature>
+        <feature>webProfile-8.0</feature>
+    </featureManager>
+
+    <applicationManager autoExpand="true"/>
+
+    <variable name="default.http.port" defaultValue="8080"/>
+    <variable name="default.https.port" defaultValue="8443"/>
+    <variable name="app.context.root" defaultValue="showcase"/>
+
+    <!-- tag::httpEndpoint[] -->
+    <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"  host="*" />
+    <!-- end::httpEndpoint[] -->
+    <webApplication id="PrimeFacesShowcase" location="liberty-faces.war" contextRoot="${app.context.root}" />
+</server>
