@@ -74,9 +74,7 @@ To run the example in HotSpot Production mode (GraalVM native-image not supporte
 ```
 git clone https://github.com/melloware/liberty-faces
 cd liberty-faces
-mvn clean compile liberty:dev
-'q' enter
-mvn liberty:package -Dinclude=all,runnable
+mvn clean package liberty:package
 java -jar target/liberty-faces.jar
 ```
 

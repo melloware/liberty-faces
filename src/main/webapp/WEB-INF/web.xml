@@ -21,9 +21,9 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
-    <context-param>
+	<context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Production</param-value>
+        <param-value>${liberty.var.jsf.stage}</param-value>
     </context-param>
     <context-param>
         <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
