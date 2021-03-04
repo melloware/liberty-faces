@@ -85,9 +85,7 @@ Then open your web browser to http://localhost:8080/
 
 ***
 ```
-mvn clean compile liberty:dev
-'q' enter
-mvn liberty:package -Dinclude=all,runnable
+mvn clean package liberty:package
 docker build -f docker/Dockerfile -t melloware/liberty-faces . 
 docker run -i --rm -p 8080:8080 melloware/liberty-faces
 ```

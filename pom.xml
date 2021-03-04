@@ -282,11 +282,11 @@
                             <goal>package</goal>
                         </goals>
                         <configuration>
-                            <packageName>primefaces</packageName>
+                            <packageName>liberty-faces</packageName>
                             <packageType>jar</packageType>
                             <include>runnable</include>
                         </configuration>
-                    </execution>                
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
