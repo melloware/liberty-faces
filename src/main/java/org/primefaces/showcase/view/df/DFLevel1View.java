@@ -26,23 +26,41 @@ package org.primefaces.showcase.view.df;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 @Named("dfLevel1View")
 @RequestScoped
 public class DFLevel1View {
-    
+
+    private LocalDateTime valueFromFlash;
+
+    @PostConstruct
+    public void init() {
+        valueFromFlash = (LocalDateTime) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("param1");
+    }
+
     public void openLevel2() {
-        Map<String,Object> options = new HashMap<String, Object>();
+        Map<String, Object> options = new HashMap<String, Object>();
         options.put("modal", true);
         PrimeFaces.current().dialog().openDynamic("level2", options, null);
     }
-    
+
     public void onReturnFromLevel2(SelectEvent event) {
         //pass back to root
         PrimeFaces.current().dialog().closeDynamic(event.getObject());
+    }
+
+    public LocalDateTime getValueFromFlash() {
+        return valueFromFlash;
+    }
+
+    public void setValueFromFlash(LocalDateTime valueFromFlash) {
+        this.valueFromFlash = valueFromFlash;
     }
 }

@@ -40,26 +40,26 @@ import java.util.List;
 @Named
 @RequestScoped
 public class TabbedView {
-    
-    private List<Product> products;
 
     @Inject
-    ProductService service;
+    private ProductService service;
+
+    private List<Product> products;
 
     @PostConstruct
     public void init() {
         products = service.getProducts(5);
     }
-    
+
     public List<Product> getProducts() {
         return products;
     }
-    
+
     public void onTabChange(TabChangeEvent event) {
         FacesMessage msg = new FacesMessage("Tab Changed", "Active Tab: " + event.getTab().getTitle());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-        
+
     public void onTabClose(TabCloseEvent event) {
         FacesMessage msg = new FacesMessage("Tab Closed", "Closed tab: " + event.getTab().getTitle());
         FacesContext.getCurrentInstance().addMessage(null, msg);

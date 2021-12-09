@@ -34,14 +34,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.showcase.domain.Country;
-import org.primefaces.showcase.domain.Theme;
 import org.primefaces.showcase.service.CountryService;
-import org.primefaces.showcase.service.ThemeService;
 
 @Named
 @RequestScoped
 public class AutoCompleteView {
-    
+
     private String txt1;
     private String txt2;
     private String txt3;
@@ -51,6 +49,7 @@ public class AutoCompleteView {
     private String txt7;
     private String txt8;
     private String txt9;
+    private String txt10;
     private Country country1;
     private Country country2;
     private Country country3;
@@ -71,6 +70,7 @@ public class AutoCompleteView {
 
         return countryList.stream().filter(t -> t.toLowerCase().startsWith(queryLowerCase)).collect(Collectors.toList());
     }
+
     public List<String> noResults(String query) {
         return Collections.EMPTY_LIST;
     }
@@ -159,6 +159,14 @@ public class AutoCompleteView {
 
     public void setTxt9(String txt9) {
         this.txt9 = txt9;
+    }
+
+    public String getTxt10() {
+        return txt10;
+    }
+
+    public void setTxt10(String txt10) {
+        this.txt10 = txt10;
     }
 
     public Country getCountry1() {

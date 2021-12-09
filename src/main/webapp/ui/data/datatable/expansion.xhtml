@@ -14,12 +14,12 @@
     </ui:define>
 
     <ui:param name="documentationLink" value="/components/datatable"/>
-    <ui:param name="widgetLink" value="datatable-1"/>
+    <ui:param name="widgetLink" value="DataTable-1"/>
 
     <ui:define name="implementation">
         <div class="card">
             <h:form>
-                <p:dataTable var="product" value="#{dtBasicView.products}">
+                <p:dataTable var="product" value="#{dtBasicView.products}" rowKey="#{product.id}">
                     <f:facet name="header">
                         Expand rows to see detailed information
                     </f:facet>
@@ -36,7 +36,9 @@
                     </p:column>
 
                     <p:column headerText="Price">
-                        <h:outputText value="$#{product.price}"/>
+                        <h:outputText value="#{product.price}">
+                            <f:convertNumber type="currency" currencySymbol="$"/>
+                        </h:outputText>
                     </p:column>
 
                     <p:column headerText="Category">

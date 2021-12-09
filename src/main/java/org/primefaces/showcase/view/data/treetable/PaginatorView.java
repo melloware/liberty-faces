@@ -23,29 +23,29 @@
  */
 package org.primefaces.showcase.view.data.treetable;
 
-import javax.faces.view.ViewScoped;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.primefaces.showcase.domain.Document;
 
 import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
 @Named("ttPaginatorView")
 @ViewScoped
 public class PaginatorView implements Serializable {
-    
-    private TreeNode root;
-            
+
+    private TreeNode<Document> root;
+
     @PostConstruct
     public void init() {
         root = new DefaultTreeNode();
-        
-        for(int i = 0; i < 50; i++) {
+
+        for (int i = 0; i < 50; i++) {
             TreeNode node = new DefaultTreeNode(new Document("Node " + i, String.valueOf((int) (Math.random() * 1000)), "Document"), root);
-            
-            for(int j = 0; j < 5; j++) {
+
+            for (int j = 0; j < 5; j++) {
                 new DefaultTreeNode(new Document("Node " + i + "." + j, String.valueOf((int) (Math.random() * 1000)), "Document"), node);
             }
         }

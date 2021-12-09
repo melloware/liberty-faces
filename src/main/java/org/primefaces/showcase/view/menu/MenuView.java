@@ -31,8 +31,10 @@ import org.primefaces.model.menu.MenuModel;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import java.io.IOException;
 
 @Named
 @RequestScoped
@@ -46,13 +48,30 @@ public class MenuView {
 
         //First submenu
         DefaultSubMenu firstSubmenu = DefaultSubMenu.builder()
-                .label("Dynamic Submenu")
+                .label("Options")
                 .build();
 
         DefaultMenuItem item = DefaultMenuItem.builder()
-                .value("External")
-                .url("http://www.primefaces.org")
-                .icon("pi pi-home")
+                .value("Save (Non-Ajax)")
+                .icon("pi pi-save")
+                .ajax(false)
+                .command("#{menuView.save}")
+                .update("messages")
+                .build();
+        firstSubmenu.getElements().add(item);
+
+        item = DefaultMenuItem.builder()
+                .value("Update")
+                .icon("pi pi-refresh")
+                .command("#{menuView.update}")
+                .update("messages")
+                .build();
+        firstSubmenu.getElements().add(item);
+
+        item = DefaultMenuItem.builder()
+                .value("Delete")
+                .icon("pi pi-times")
+                .command("#{menuView.delete}")
                 .build();
         firstSubmenu.getElements().add(item);
 
@@ -60,28 +79,19 @@ public class MenuView {
 
         //Second submenu
         DefaultSubMenu secondSubmenu = DefaultSubMenu.builder()
-                .label("Dynamic Actions")
+                .label("Navigations")
                 .build();
 
         item = DefaultMenuItem.builder()
-                .value("Save")
-                .icon("pi pi-save")
-                .command("#{menuView.save}")
-                .update("messages")
-                .build();
-        secondSubmenu.getElements().add(item);
-
-        item = DefaultMenuItem.builder()
-                .value("Delete")
-                .icon("pi pi-times")
-                .command("#{menuView.delete}")
-                .ajax(false)
+                .value("Website")
+                .url("http://www.primefaces.org")
+                .icon("pi pi-external-link")
                 .build();
         secondSubmenu.getElements().add(item);
 
         item = DefaultMenuItem.builder()
-                .value("Redirect")
-                .icon("pi pi-search")
+                .value("Internal")
+                .icon("pi pi-upload")
                 .command("#{menuView.redirect}")
                 .build();
         secondSubmenu.getElements().add(item);
@@ -93,16 +103,22 @@ public class MenuView {
         return model;
     }
 
+    public void redirect() throws IOException {
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(ec.getRequestContextPath());
+    }
+
     public void save() {
-        addMessage("Success", "Data saved");
+        addMessage("Save", "Data saved");
     }
 
     public void update() {
-        addMessage("Success", "Data updated");
+        addMessage("Update", "Data updated");
     }
 
     public void delete() {
-        addMessage("Success", "Data deleted");
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Delete", "Data deleted");
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     public void addMessage(String summary, String detail) {

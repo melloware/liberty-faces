@@ -9,7 +9,8 @@
       lang="#{p:language()}" xml:lang="#{p:language()}">
 
     <h:head>
-        <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-93461466-1"></script>
+        <f:facet name="first">
+            <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-93461466-1"></script>
             <script>
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -22,7 +23,16 @@
             <meta name="apple-mobile-web-app-capable" content="yes"/>
             <link href="#{resource['showcase/images/favicon-32x32.png']}" rel="icon" type="image/png" sizes="32x32"/>
             <link href="#{resource['showcase/images/favicon-16x16.png']}" rel="icon" type="image/png" sizes="16x16"/>
+        </f:facet>
         <title>PrimeFaces Showcase</title>
+
+        <h:outputStylesheet name="css/primeflex.css" library="showcase"/>
+        <h:outputStylesheet name="css/flags/flags.css" library="showcase"/>
+
+        <h:outputScript name="jquery/jquery.js" library="primefaces"/>
+        <h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
+        <h:outputScript name="locales/locale-#{app.locale.language}.js" library="primefaces"/>
+
         <ui:insert name="head"/>
         
     </h:head>
@@ -58,13 +68,13 @@
                         </div>
                         <div class="feature-documentation">
                             <ui:fragment rendered="#{not empty documentationLink}">
-                                <a class="documentation-link" href="https://primefaces.github.io/primefaces/10_0_0/##{documentationLink}" target="_blank">
+                                <a class="documentation-link" href="https://primefaces.github.io/primefaces/11_0_0/##{documentationLink}" target="_blank">
                                     <i class="pi pi-external-link"></i> 
                                     <span>SERVER API</span>
                                 </a>
                             </ui:fragment>
                             <ui:fragment rendered="#{not empty widgetLink}">
-                                <a class="documentation-link" href="https://primefaces.github.io/primefaces/jsdocs/classes/src_primefaces.primefaces.widget.#{widgetLink}.html#{not empty widgetLinkHash ? '#'.concat(widgetLinkHash) : ''}" target="_blank">
+                                <a class="documentation-link" href="https://primefaces.github.io/primefaces/jsdocs/classes/src_PrimeFaces.PrimeFaces.widget.#{widgetLink}.html#{not empty widgetLinkHash ? '#'.concat(widgetLinkHash) : ''}" target="_blank">
                                     <i class="pi pi-external-link"></i> 
                                     <span>CLIENT API</span>
                                 </a>
@@ -90,7 +100,13 @@
                         </ui:insert>
                     </div>
                 </ui:insert>
-               <ui:include src="./footer.xhtml"></ui:include>
+                <ui:include src="./footer.xhtml"></ui:include>
+                <p:ajaxExceptionHandler type="javax.faces.application.ViewExpiredException" update="viewExpiredDialog" onexception="PF('viewExpiredDialog').show();" />
+                <p:dialog id="viewExpiredDialog" header="Session expired" widgetVar="viewExpiredDialog" height="500px" onShow="document.location.href = document.location.href;">
+                    <h3>Reloading page</h3>
+                    Message: #{pfExceptionHandler.message} <br/>
+                    StackTrace: <h:outputText value="#{pfExceptionHandler.formattedStackTrace}" escape="false" />
+                </p:dialog>
             </div>
         </div>
 
@@ -109,14 +125,8 @@
         <ui:insert name="body"></ui:insert>
 
         <h:outputStylesheet name="css/layout/layout.css" library="showcase"/>
-        <h:outputStylesheet name="css/primeflex.css" library="showcase"/>
-        <h:outputStylesheet name="css/flags/flags.css" library="showcase"/>
-
-        <h:outputScript name="script/layout.js" library="showcase" target="head"/>
-        <h:outputScript name="showcase/script/prism.js" target="head"/>
-        <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
-        <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" target="head"/>
-        <h:outputScript name="locales/locale-#{app.locale.language}.js" library="primefaces" target="head"/>
+        <h:outputScript name="script/layout.js" library="showcase" />
+        <h:outputScript name="showcase/script/prism.js" />
         </f:view>
     </h:body>
 

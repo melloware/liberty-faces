@@ -57,12 +57,13 @@ public class CountryService {
         }
 
         Collections.sort(countries, (Country c1, Country c2) -> c1.getName().compareTo(c2.getName()));
-        
+
         int i = 0;
         locales.add(new Country(i++, Locale.US));
         locales.add(new Country(i++, Locale.FRANCE));
         locales.add(new Country(i++, Locale.GERMANY));
         locales.add(new Country(i++, Locale.ITALY));
+        locales.add(new Country(i++, Locale.KOREA));
         locales.add(new Country(i++, new Locale("es", "ES")));
         locales.add(new Country(i++, new Locale("ca", "ES")));
         locales.add(new Country(i++, new Locale("nl", "NL")));
@@ -72,10 +73,13 @@ public class CountryService {
         locales.add(new Country(i++, new Locale("cs", "CZ")));
         locales.add(new Country(i++, new Locale("el", "GR")));
         locales.add(new Country(i++, new Locale("fa", "IR"), true));
+        locales.add(new Country(i++, new Locale("hi", "IN")));
+        locales.add(new Country(i++, new Locale("in", "ID")));
         locales.add(new Country(i++, new Locale("hr", "HR")));
         locales.add(new Country(i++, new Locale("hu", "HU")));
         locales.add(new Country(i++, new Locale("iw", "IL"), true));
         locales.add(new Country(i++, new Locale("ka", "GE")));
+        locales.add(new Country(i++, new Locale("lt", "LT")));
         locales.add(new Country(i++, new Locale("lv", "LV")));
         locales.add(new Country(i++, new Locale("no", "NO")));
         locales.add(new Country(i++, new Locale("pl", "PL")));
@@ -102,14 +106,14 @@ public class CountryService {
         }
         return countriesAsMap;
     }
-    
+
     public List<Country> getLocales() {
         return new ArrayList<>(locales);
     }
-    
+
     public Map<Integer, Country> getLocalesAsMap() {
         if (localesAsMap == null) {
-        	localesAsMap = getLocales().stream().collect(Collectors.toMap(Country::getId, country -> country));
+            localesAsMap = getLocales().stream().collect(Collectors.toMap(Country::getId, country -> country));
         }
         return localesAsMap;
     }

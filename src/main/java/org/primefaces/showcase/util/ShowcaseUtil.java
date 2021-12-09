@@ -23,12 +23,14 @@
  */
 package org.primefaces.showcase.util;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.enterprise.inject.spi.CDI;
 
+import javax.enterprise.inject.spi.CDI;
 import javax.faces.application.ProjectStage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIPanel;
@@ -38,6 +40,10 @@ import org.primefaces.cache.CacheProvider;
 import org.primefaces.component.tabview.Tab;
 
 public class ShowcaseUtil {
+
+    private ShowcaseUtil() {
+
+    }
 
     public static final List<FileContent> getFilesContent(String fullPath, Boolean readBeans) {
         CacheProvider provider = CDI.current().select(ShowcaseCacheProvider.class).get().getCacheProvider();
@@ -60,6 +66,11 @@ public class ShowcaseUtil {
         return files;
     }
 
+    public static final Object getPropertyValueViaReflection(Object o, String field)
+                throws ReflectiveOperationException, IllegalArgumentException, IntrospectionException {
+        return new PropertyDescriptor(field, o.getClass()).getReadMethod().invoke(o);
+    }
+
     // EXCLUDE-SOURCE-START
     private static final FileContent getFileContent(String fullPath, Boolean readBeans) {
         try {
@@ -75,7 +86,8 @@ public class ShowcaseUtil {
             if (is != null) {
                 return FileContentMarkerUtil.readFileContent(fullPath, is, readBeans);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new IllegalStateException("Internal error: file " + fullPath + " could not be read", e);
         }
 
@@ -102,7 +114,7 @@ public class ShowcaseUtil {
     private static void flatFileContent(FileContent source, List<FileContent> dest) {
         dest.add(new FileContent(source.getTitle(), source.getValue(), source.getType(), Collections.<FileContent>emptyList()));
 
-        for(FileContent file : source.getAttached()) {
+        for (FileContent file : source.getAttached()) {
             flatFileContent(file, dest);
         }
     }

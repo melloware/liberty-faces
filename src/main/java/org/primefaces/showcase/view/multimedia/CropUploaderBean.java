@@ -32,7 +32,6 @@ import org.primefaces.model.file.UploadedFile;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseId;
 import javax.inject.Named;
 
 import java.io.ByteArrayInputStream;
@@ -41,9 +40,9 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class CropUploaderBean implements Serializable {
-    
+
     private CroppedImage croppedImage;
-    
+
     private UploadedFile originalImageFile;
 
     public CroppedImage getCroppedImage() {
@@ -53,16 +52,16 @@ public class CropUploaderBean implements Serializable {
     public void setCroppedImage(CroppedImage croppedImage) {
         this.croppedImage = croppedImage;
     }
-    
+
     public UploadedFile getOriginalImageFile() {
         return originalImageFile;
     }
-    
+
     public void handleFileUpload(FileUploadEvent event) {
         this.originalImageFile = null;
         this.croppedImage = null;
         UploadedFile file = event.getFile();
-        if(file != null && file.getContent() != null && file.getContent().length > 0 && file.getFileName() != null) {
+        if (file != null && file.getContent() != null && file.getContent().length > 0 && file.getFileName() != null) {
             this.originalImageFile = file;
             FacesMessage msg = new FacesMessage("Successful", this.originalImageFile.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -71,31 +70,34 @@ public class CropUploaderBean implements Serializable {
 
     public void crop() {
         if (this.croppedImage == null || this.croppedImage.getBytes() == null || this.croppedImage.getBytes().length == 0) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Cropping failed."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+                    "Cropping failed."));
         }
         else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Cropped successfully."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success",
+                    "Cropped successfully."));
         }
     }
-    
+
     public StreamedContent getImage() {
         return DefaultStreamedContent.builder()
-            .contentType(originalImageFile == null ? null : originalImageFile.getContentType())
-            .stream(() -> {
-                if (originalImageFile == null
-                        || originalImageFile.getContent() == null
-                        || originalImageFile.getContent().length == 0) {
-                    return null;
-                }
+                .contentType(originalImageFile == null ? null : originalImageFile.getContentType())
+                .stream(() -> {
+                    if (originalImageFile == null
+                            || originalImageFile.getContent() == null
+                            || originalImageFile.getContent().length == 0) {
+                        return null;
+                    }
 
-                try {
-                    return new ByteArrayInputStream(originalImageFile.getContent());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            })
-            .build();
+                    try {
+                        return new ByteArrayInputStream(originalImageFile.getContent());
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                })
+                .build();
     }
 
     public StreamedContent getCropped() {
@@ -107,15 +109,16 @@ public class CropUploaderBean implements Serializable {
                             || croppedImage.getBytes().length == 0) {
                         return null;
                     }
-                    
+
                     try {
                         return new ByteArrayInputStream(this.croppedImage.getBytes());
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         e.printStackTrace();
                         return null;
                     }
                 })
                 .build();
     }
-    
+
 }

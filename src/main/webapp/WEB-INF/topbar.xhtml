@@ -19,7 +19,11 @@
                     <h:link outcome="/getstarted">Get Started</h:link>
                 </li>
                 <li class="topbar-submenu">
-                    <a tabindex="0">Themes</a>
+                    <a tabindex="0">
+                        <p:badge severity="danger" styleClass="p-d-inline">
+                            <h:outputText value="Themes"/>
+                        </p:badge>
+                    </a>
                     <ul class="connected-overlay-in">
                         <li class="topbar-submenu-header">THEMING</li>
                         <li><h:link outcome="/theming"><i class="pi pi-fw pi-file"></i><span>Guide</span></h:link></li>
@@ -91,6 +95,12 @@
                         <li><a href="https://www.primefaces.org/whouses" target="_blank"><span>Who Uses</span></a></li>
                         <li><a href="https://www.primefaces.org/newsletter" target="_blank"><span>Newsletter</span></a></li>
                         <li><a href="https://www.primetek.com.tr" target="_blank"><span>About PrimeTek</span></a></li>
+                    </ul>
+                </li>
+                <li class="topbar-submenu">
+                    <a tabindex="0">v#{app.primeFacesVersion}</a>
+                    <ul class="connected-overlay-in" style="width: 100%">
+                        <li><a href="https://www.primefaces.org/showcase-v8/"><span>v8</span></a></li>
                     </ul>
                 </li>
             </ul>

@@ -28,22 +28,23 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Customer implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
 
-    public int id;
-    public String name;
-    public String company;
-    public Country country;
-    public LocalDate date;
-    public CustomerStatus status;
-    public int activity;
-    public Representative representative;
+    private static final long serialVersionUID = 1L;
+
+    private int id;
+    private String name;
+    private String company;
+    private Country country;
+    private LocalDate date;
+    private CustomerStatus status;
+    private int activity;
+    private Representative representative;
 
     public Customer() {
     }
 
-    public Customer(int id, String name, String company, Country country, LocalDate date, CustomerStatus status, int activity, Representative representative) {
+    public Customer(int id, String name, String company, Country country, LocalDate date, CustomerStatus status, int activity,
+                Representative representative) {
         this.id = id;
         this.name = name;
         this.company = company;
@@ -120,17 +121,21 @@ public class Customer implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Customer customer = (Customer) o;
-        return id == customer.id &&
-                activity == customer.activity &&
-                Objects.equals(name, customer.name) &&
-                Objects.equals(company, customer.company) &&
-                Objects.equals(country, customer.country) &&
-                Objects.equals(date, customer.date) &&
-                status == customer.status &&
-                Objects.equals(representative, customer.representative);
+        return id == customer.id
+                    && activity == customer.activity
+                    && Objects.equals(name, customer.name)
+                    && Objects.equals(company, customer.company)
+                    && Objects.equals(country, customer.country)
+                    && Objects.equals(date, customer.date)
+                    && status == customer.status
+                    && Objects.equals(representative, customer.representative);
     }
 
     @Override

@@ -36,12 +36,12 @@ import java.util.List;
 @Named
 @RequestScoped
 public class RingView implements Serializable {
-    
-    private List<Product> products;
-    private Product selectedProduct;
 
     @Inject
-    ProductService service;
+    private ProductService service;
+
+    private List<Product> products;
+    private Product selectedProduct;
 
     @PostConstruct
     public void init() {

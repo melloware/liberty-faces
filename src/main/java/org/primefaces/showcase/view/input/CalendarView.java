@@ -61,6 +61,7 @@ public class CalendarView implements Serializable {
     private Date date15;
     private Date date16;
     private Date dateTimeDe;
+    private Date dateTimeMillis;
     private List<Date> multi;
     private List<Date> range;
     private List<Date> invalidDates;
@@ -71,7 +72,6 @@ public class CalendarView implements Serializable {
     private Date maxTime;
     private Date minDateTime;
     private Date maxDateTime;
-
 
     @PostConstruct
     public void init() {
@@ -84,7 +84,8 @@ public class CalendarView implements Serializable {
         }
 
         invalidDays = new ArrayList<>();
-        invalidDays.add(0); /* the first day of week is disabled */
+        invalidDays.add(0);
+        /* the first day of week is disabled */
         invalidDays.add(3);
 
         minDate = new Date(today.getTime() - (365 * oneDay));
@@ -102,13 +103,14 @@ public class CalendarView implements Serializable {
         tmp.set(Calendar.MINUTE, 0);
         tmp.set(Calendar.SECOND, 0);
         tmp.set(Calendar.MILLISECOND, 0);
-        maxTime =  tmp.getTime();
+        maxTime = tmp.getTime();
 
         minDateTime = new Date(today.getTime() - (7 * oneDay));
         maxDateTime = new Date(today.getTime() + (7 * oneDay));
 
         dateDe = GregorianCalendar.getInstance().getTime();
         dateTimeDe = GregorianCalendar.getInstance().getTime();
+        dateTimeMillis = GregorianCalendar.getInstance().getTime();
     }
 
     public void onDateSelect(SelectEvent<Date> event) {
@@ -304,6 +306,14 @@ public class CalendarView implements Serializable {
 
     public void setDateDe(Date dateDe) {
         this.dateDe = dateDe;
+    }
+
+    public Date getDateTimeMillis() {
+        return dateTimeMillis;
+    }
+
+    public void setDateTimeMillis(Date dateTimeMillis) {
+        this.dateTimeMillis = dateTimeMillis;
     }
 
     public Date getDate15() {

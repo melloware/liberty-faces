@@ -71,7 +71,7 @@
                     </p:outputPanel>
                 </p:fieldset>
 
-                <p:droppable for="selectedProducts" tolerance="touch" activeStyleClass="ui-state-highlight"
+                <p:droppable for="selectedProducts" tolerance="pointer" activeStyleClass="ui-state-highlight"
                              datasource="availableProducts" onDrop="handleDrop">
                     <p:ajax listener="#{dndProductsView.onProductDrop}" update="dropArea availableProducts"/>
                 </p:droppable>
