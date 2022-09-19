@@ -20,7 +20,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <omnifaces.version>3.13.4</omnifaces.version>
-        <poi.version>5.2.2</poi.version>
+        <poi.version>5.2.3</poi.version>
         <primefaces.version>11.0.0</primefaces.version>
         <primefaces-extensions.version>11.0.6</primefaces-extensions.version>
         <primefaces.optimizer.version>2.3.5</primefaces.optimizer.version>
