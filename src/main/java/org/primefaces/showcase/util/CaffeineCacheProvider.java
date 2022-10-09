@@ -21,46 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.primefaces.showcase.view.data;
+package org.primefaces.showcase.util;
 
-import org.primefaces.showcase.domain.Product;
-import org.primefaces.showcase.service.ProductService;
+import org.primefaces.cache.CacheProvider;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.Serializable;
-import java.util.List;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 
-@Named
-@RequestScoped
-public class RingView implements Serializable {
+/**
+ * Caffeine Cache Provider
+ */
+public class CaffeineCacheProvider implements CacheProvider {
 
-    @Inject
-    private ProductService service;
+    private Cache<String, Object> cache;
 
-    private List<Product> products;
-    private Product selectedProduct;
-
-    @PostConstruct
-    public void init() {
-        products = service.getProducts(5);
+    public CaffeineCacheProvider() {
+        this.cache = Caffeine.newBuilder()
+                    .maximumSize(200)
+                    .build();
     }
 
-    public List<Product> getProducts() {
-        return products;
+    @Override
+    public Object get(String region, String key) {
+        return cache.getIfPresent(region + key);
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    @Override
+    public void put(String region, String key, Object object) {
+        cache.put(region + key, object);
     }
 
-    public Product getSelectedProduct() {
-        return selectedProduct;
+    @Override
+    public void remove(String region, String key) {
+        cache.invalidate(region + key);
     }
 
-    public void setSelectedProduct(Product selectedProduct) {
-        this.selectedProduct = selectedProduct;
+    @Override
+    public void clear() {
+        cache.invalidateAll();
+    }
+
+    public Cache<String, Object> getCache() {
+        return cache;
+    }
+
+    public void setCache(Cache<String, Object> cache) {
+        this.cache = cache;
     }
 }
