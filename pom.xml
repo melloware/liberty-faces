@@ -22,7 +22,7 @@
         <omnifaces.version>3.14.2</omnifaces.version>
         <poi.version>5.2.3</poi.version>
         <primefaces.version>12.0.0</primefaces.version>
-        <primefaces-extensions.version>12.0.8</primefaces-extensions.version>
+        <primefaces-extensions.version>13.0.1</primefaces-extensions.version>
         <primefaces.optimizer.version>2.3.5</primefaces.optimizer.version>
         <liberty.var.default.http.port>8080</liberty.var.default.http.port>
         <liberty.var.default.https.port>8443</liberty.var.default.https.port>
